@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "reports",
     "django_filters",
+    "users"
 ]
 
 MIDDLEWARE = [
@@ -154,7 +155,9 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
     ],
-
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
     "DEFAULT_THROTTLE_RATES": {
         "anon": "20/hour",
         "odour_report": "1000/hour",
