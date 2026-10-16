@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 import dj_database_url
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+DEBUG = config("DEBUG", cast=bool, default=False)
 
 ALLOWED_HOSTS = []
 
@@ -104,8 +105,11 @@ DATABASES = {
     )
 }
 
-GDAL_LIBRARY_PATH = r"C:\Program Files\PostgreSQL\18\bin\libgdal-35.dll"
-GEOS_LIBRARY_PATH = r"C:\Program Files\PostgreSQL\18\bin\libgeos_c.dll"
+
+
+if sys.platform == "win32":
+    GDAL_LIBRARY_PATH = r"C:\Program Files\PostgreSQL\18\bin\libgdal-35.dll"
+    GEOS_LIBRARY_PATH = r"C:\Program Files\PostgreSQL\18\bin\libgeos_c.dll"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -143,7 +147,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STORAGES = {
     "staticfiles": {
