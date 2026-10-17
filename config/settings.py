@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=False)
 
-ALLOWED_HOSTS = ["ondo-watch.onrender.com"]
+ALLOWED_HOSTS = ["ondo-watch.onrender.com", "127.0.0.1"]
 
 
 # Application definition
@@ -63,6 +63,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "config.urls"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://ondowatch.netlify.app"
 ]
 
 CORS_ALLOW_HEADERS = [
